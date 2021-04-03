@@ -57,7 +57,7 @@
     "gatsby-plugin-sharp": "^2.6.39",
     "gatsby-plugin-theme-ui": "0.4.0-rc.5",
     "gatsby-plugin-typescript": "^2.4.21",
-    "gatsby-remark-images": "^3.3.33",
+    "gatsby-remark-images": "^4.2.0",
     "gatsby-source-filesystem": "^2.3.34",
     "gatsby-transformer-sharp": "^2.5.17",
     "lodash": "^4.17.20",
