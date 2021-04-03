@@ -1335,10 +1335,10 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@hookit/local-storage@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@hookit/local-storage/-/local-storage-0.0.10.tgz#7ae5c6c85ef6da1697d64ebb1deb5377945a9fa9"
-  integrity sha512-uasbCTcjFbA/xVv3jAEmfatHwx5GEdnpWY+L2teOY43FLG41s+isBfNakYytW2nKD91tya72jFRL/RATyNPETQ==
+"@hookit/local-storage@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@hookit/local-storage/-/local-storage-0.1.0.tgz#ce997f480d25530603d62c3344baa78d6c6afd14"
+  integrity sha512-w57e3UE3W6UkhZsKBHuS9+BCXSMXvspqAwnFrYoL9CHkVeHf38ccvUNYFWZFbEJP0UtAaxirUPs42LBc30evMA==
 
 "@iarna/toml@2.2.5", "@iarna/toml@^2.2.5":
   version "2.2.5"
