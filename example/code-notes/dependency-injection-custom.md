@@ -79,8 +79,126 @@ fun main() {
 }
 ```
 
+Данный код вполне будет работоспособным, но в нем явно прослеживается сильная связанность между компонентами. 
+Более того, в классе UserNotificationService нарушается "Принцип единой ответственности" (Single Responsibility Principle), ибо он отвечает не только за инкапсуляцию вызовов методов SmsService и EmailService, но и за создание экземпляров классов.
+Попробуем решить проблему нарушения принципа делегированием создания объектов некоторой фабрике (Object Factory):
 
 
+```kotlin
+package by.zmitser.dependency.injection.framework
+
+class ObjectFactory private constructor(private val config: Config = KotlinConfig()) {
+
+    fun <T> createObject(type: Class<T>): T {
+        return config.getImplClass(type).getDeclaredConstructor().newInstance()
+    }
+
+    companion object {
+        val instance = ObjectFactory()
+    }
+}
+```
+
+Создадим также класс, в котором будут определены некоторые конфигурационные настройки 
+
+```kotlin
+package by.zmitser.dependency.injection.framework
+
+interface Config {
+
+    fun <T> getImplClass(ifc: Class<T>): Class<T>
+}
+
+class KotlinConfig : Config {
+
+    override fun <T> getImplClass(ifc: Class<T>): Class<T> {
+        return this.javaClass.classLoader.loadClass(ifc.name) as Class<T>
+    }
+}
+```
+
+Теперь класс UserNotificationService можно переписать следующим образом:
+
+```kotlin
+package by.zmitser.dependency.injection.example
+
+import by.zmitser.dependency.injection.framework.ObjectFactory
+
+class UserNotificationService(
+    private val emailService: EmailService = ObjectFactory.instance.createObject(SimpleEmailService::class.java),
+    private val smsService: SmsService = ObjectFactory.instance.createObject(SimpleSmsService::class.java)
+) {
 
 
+    fun notify(user: User, message: String) {
+        emailService.sendEmail(message, user.email)
+        smsService.sendSms(message, user.phone)
+    }
+}
+```
+Теперь мы видим, что создание объектов было делегировано фабрике. Но UserNotificationService явно определяет, какая реализация ему нужна.
+Используем библиотеку СlassGraph и перепишем код:
 
+```kotlin
+import io.github.classgraph.ClassGraph
+
+interface Config {
+
+    fun <T> getImplClass(ifc: Class<T>): Class<T>
+}
+
+class KotlinConfig(private val packageToScan: String, private val classGraph: ClassGraph = ClassGraph()) : Config {
+
+    override fun <T> getImplClass(ifc: Class<T>): Class<T> {
+        val result = classGraph.acceptPackages(packageToScan)
+            .scan()
+            .allClasses.filter {
+                it.implementsInterface(ifc.name)
+            }
+        if (result.size != 1) {
+            throw RuntimeException("$ifc has 0 or more than one impl")
+        }
+        return result.loadClasses(ifc).first()
+    }
+}
+```
+
+```kotlin
+package by.zmitser.dependency.injection.framework
+
+import Config
+import KotlinConfig
+
+class ObjectFactory private constructor(private val config: Config = KotlinConfig("by.zmitser.dependency.injection.example")) {
+
+    fun <T> createObject(type: Class<T>): T {
+        var implClass: Class<out T> = type
+        if (type.isInterface) {
+            implClass = config.getImplClass(type)
+        }
+        return implClass.getDeclaredConstructor().newInstance()
+    }
+
+    companion object {
+        val instance = ObjectFactory()
+    }
+}
+```
+
+```kotlin
+package by.zmitser.dependency.injection.example
+
+import by.zmitser.dependency.injection.framework.ObjectFactory
+
+class UserNotificationService(
+    private val emailService: EmailService = ObjectFactory.instance.createObject(EmailService::class.java),
+    private val smsService: SmsService = ObjectFactory.instance.createObject(SmsService::class.java)
+) {
+
+
+    fun notify(user: User, message: String) {
+        emailService.sendEmail(message, user.email)
+        smsService.sendSms(message, user.phone)
+    }
+}
+```
