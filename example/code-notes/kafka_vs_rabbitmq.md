@@ -1,8 +1,8 @@
 ---
 title: Сходства и различия Kafka и RabbitMQ
 tags:
-- microservice
-  created: 2021-04-07
+- microservice 
+created: 2021-04-07
 ---
 
 ###### СХОДСТВА APACHE KAFKA И RABBITMQ
