@@ -15,7 +15,7 @@ module.exports = {
         showDescriptionInSidebar: true,
         showThemeInfo: true,
         logo:
-          'https://raw.githubusercontent.com/mrmartineau/gatsby-theme-code-notes/master/assets/logo.png',
+          'https://raw.githubusercontent.com/Zmitser/gatsby-theme-code-notes/master/assets/logo.png',
         openSearch: {
           siteShortName: `Gatsby Theme Code Notes Example`,
           siteUrl: 'https://code-notes-example.netlify.app',
