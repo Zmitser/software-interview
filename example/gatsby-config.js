@@ -37,7 +37,6 @@ module.exports = {
         background_color: `hsl(210, 38%, 95%)`,
         theme_color: `hsl(345, 100%, 69%)`,
         display: `standalone`,
-        icon: `https://raw.githubusercontent.com/mrmartineau/gatsby-theme-code-notes/master/assets/logo.png`,
       },
     },
     {
