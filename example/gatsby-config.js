@@ -11,7 +11,7 @@ module.exports = {
         contentPath: 'code-notes',
         basePath: '/',
         gitRepoContentPath:
-          'https://github.com/mrmartineau/gatsby-theme-code-notes/tree/master/example/code-notes/',
+          'https://github.com/Zmitser/software-interview/tree/master/example/code-notes',
         showDescriptionInSidebar: true,
         showThemeInfo: true,
         logo:
