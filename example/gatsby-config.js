@@ -37,7 +37,7 @@ module.exports = {
         background_color: `hsl(210, 38%, 95%)`,
         theme_color: `hsl(345, 100%, 69%)`,
         display: `standalone`,
-        icon: `assets/logo.png`,
+        icon: `../assets/logo.png`,
       },
     },
     {
