@@ -30,7 +30,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Zander's Code Notes`,
+        name: `Software interview notes`,
         short_name: `CodeNotes`,
         description: `Notes on code. My memory bank.`,
         start_url: `/`,
