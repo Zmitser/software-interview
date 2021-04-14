@@ -15,7 +15,7 @@ module.exports = {
         showDescriptionInSidebar: true,
         showThemeInfo: true,
         logo:
-          'https://raw.githubusercontent.com/Zmitser/gatsby-theme-code-notes/master/assets/logo.png',
+          'https://raw.githubusercontent.com/mrmartineau/gatsby-theme-code-notes/master/assets/logo.png',
         openSearch: {
           siteShortName: `Gatsby Theme Code Notes Example`,
           siteUrl: 'https://code-notes-example.netlify.app',
@@ -37,7 +37,7 @@ module.exports = {
         background_color: `hsl(210, 38%, 95%)`,
         theme_color: `hsl(345, 100%, 69%)`,
         display: `standalone`,
-        icon: `static/logo.png`,
+        icon: `https://raw.githubusercontent.com/mrmartineau/gatsby-theme-code-notes/master/assets/logo.png`,
       },
     },
     {
