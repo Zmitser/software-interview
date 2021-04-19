@@ -1,7 +1,7 @@
 ---
 title: Реализация LRUCache на Java
 tags:
- - tutorial 
+ - tutorials 
 created: 2021-04-13
 ---
 
